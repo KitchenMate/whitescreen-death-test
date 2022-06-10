@@ -19,7 +19,6 @@
         <script>
             window.filesLoaded = 0;
             window.totalFiles = 1000;
-            window.loadState = "complete";
 
             console.log("Loading all scripts!")
             let i=0;
@@ -42,7 +41,6 @@
             setInterval(async () => {
                 document.querySelector("h1").innerHTML = `${filesLoaded}/${totalFiles} Files Loaded. \n
                 Build #: ${window.currentVersion.versionId}`;
-                document.querySelector("h2").innerHTML = `Document State: ${window.loadState}`;
             }, 1);
 
             // Run sync (test at different file load amounts)
