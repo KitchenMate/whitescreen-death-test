@@ -3,7 +3,7 @@ const image = fs.readFileSync('./base64Image.txt', 'utf8');
 
 
 const fileContent = (i) => `
-    console.log("File ${i} loaded"); 
+    //console.log("File ${i} loaded"); 
     window.filesLoaded += 1;
     let myData${i} = \`${image}\`;
 `;
