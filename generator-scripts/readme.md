@@ -1,0 +1,1 @@
+Use this script to regenerate all the files inside www/additionalFiles

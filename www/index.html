@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <h1 style="
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            text-align: center;
+        ">0/1000 Files Loaded. Build #: </h1>
+
+        <button style="
+            position: absolute;
+            top: 75%;
+            width: 100%;
+            text-align: center;
+            font-size: 50px;
+        ">Run Deploy.Sync()</button>
+    </head>
+    <body>
+        <script>
+            window.filesLoaded = 0;
+            window.totalFiles = 1000;
+            window.loadState = "complete";
+
+            console.log("Loading all scripts!")
+            let i=0;
+            // This interval is used to load files in pseudo-parallel, it appears that
+            // ionic sync() failure is correlated to document state
+            setInterval(() => {
+                if (i>= window.totalFiles) return;
+                const newScript = document.createElement("script");
+                newScript.src = `/additionalFiles/file${i}.js`;
+                document.body.appendChild(newScript);
+                i++;
+            }, 10);
+
+            window.currentVersion = {versionId: "Searching"}
+            setInterval(async () => {
+                window.currentVersion = (await IonicCordova.deploy.getCurrentVersion()) || {versionId: "No version found"}
+            })
+
+            // This interval checks how many files have loaded, and the current document state
+            setInterval(async () => {
+                document.querySelector("h1").innerHTML = `${filesLoaded}/${totalFiles} Files Loaded. \n
+                Build #: ${window.currentVersion.versionId}`;
+                document.querySelector("h2").innerHTML = `Document State: ${window.loadState}`;
+            }, 1);
+
+            // Run sync (test at different file load amounts)
+            document.querySelector("button").onclick = async () => {
+                window.currentVersion = await IonicCordova.deploy.getCurrentVersion() || {versionId: "No version found"}
+                const newVersion = await IonicCordova.deploy.sync();
+                if (newVersion.versionId != currentVersion.versionId) alert("UPDATED!");
+            }
+        </script>
+    </body>
+</html>

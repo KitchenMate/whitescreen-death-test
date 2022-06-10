@@ -1,0 +1,12 @@
+{
+  "name": "failed-deploy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@capacitor/cli": "2",
+    "@capacitor/core": "2",
+    "@capacitor/ios": "2.5.0",
+    "cordova-plugin-ionic": "^5.5.2"
+  }
+}
