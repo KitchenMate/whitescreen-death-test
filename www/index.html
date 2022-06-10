@@ -46,6 +46,7 @@
             // Run sync (test at different file load amounts)
             document.querySelector("button").onclick = async () => {
                 window.currentVersion = await IonicCordova.deploy.getCurrentVersion() || {versionId: "No version found"}
+                console.log("Running sync... ", {currentVersion: window.currentVersion})
                 const newVersion = await IonicCordova.deploy.sync();
                 if (newVersion.versionId != currentVersion.versionId) alert("UPDATED!");
             }
