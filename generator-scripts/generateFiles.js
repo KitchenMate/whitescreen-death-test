@@ -8,5 +8,5 @@ const fileContent = (i) => `
     let myData${i} = \`${image}\`;
 `;
 
-for (let i=0; i < 1000;i++)
+for (let i=0; i < 100;i++)
     fs.writeFile(`../www/additionalFiles/file${i}.js`, fileContent(i), () => {})
